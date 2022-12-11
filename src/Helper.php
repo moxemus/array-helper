@@ -30,11 +30,4 @@ class Helper
 
         return true;
     }
-
-    public function swap(&$a, &$b): void
-    {
-        $temp = $a;
-        $a = $b;
-        $b = $temp;
-    }
 }
