@@ -1,0 +1,13 @@
+{
+    "name": "moxemus/array-helper",
+    "description": "Array helper for PHP",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "moxemus\\array\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
