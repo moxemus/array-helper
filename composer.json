@@ -8,6 +8,6 @@
             "moxemus\\array\\": "src/"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {}
 }
