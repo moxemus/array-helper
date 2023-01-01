@@ -14,6 +14,11 @@ class Helper
         return $array[$firstIndex];
     }
 
+    public static function isEmpty(array $array): bool
+    {
+        return empty(array_filter($array));
+    }
+
     public static function moveElement(array &$array, $indexFrom, $indexTo): bool
     {
         $fromValue = $array[$indexFrom] ?? null;
