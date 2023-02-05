@@ -89,7 +89,9 @@ class Helper
      */
     public static function getFirstIndex(array $array): string|int|null
     {
-        if (empty($array)) return null;
+        if (empty($array)) {
+            return null;
+        }
 
         $keys = array_keys($array);
 
@@ -105,7 +107,9 @@ class Helper
      */
     public static function getLastIndex(array $array): string|int|null
     {
-        if (empty($array)) return null;
+        if (empty($array)) {
+            return null;
+        }
 
         $keys = array_keys($array);
 
@@ -122,7 +126,9 @@ class Helper
      */
     public static function getMaxIndex(array $array): string|int|null
     {
-        if (empty($array)) return null;
+        if (empty($array)) {
+            return null;
+        }
 
         return array_keys($array, max($array))[0];
     }
@@ -137,9 +143,28 @@ class Helper
      */
     public static function getMinIndex(array $array): string|int|null
     {
-        if (empty($array)) return null;
+        if (empty($array)) {
+            return null;
+        }
 
         return array_keys($array, min($array))[0];
+    }
+
+    /**
+     * Returns linear array from multidimensional
+     *
+     * @param array $array
+     *
+     * @return array
+     */
+    public static function getSimpleArray(array $array): array
+    {
+        $result = [];
+        array_walk_recursive($array, function ($item, $key) use (&$result) {
+            $result[] = $item;
+        });
+
+        return $result;
     }
 
     /**
@@ -156,10 +181,11 @@ class Helper
         $fromValue = $array[$indexFrom] ?? null;
         $toValue   = $array[$indexTo]   ?? null;
 
-        if (is_null($fromValue)) return false;
+        if (is_null($fromValue)) {
+            return false;
+        }
 
-        if (isset($toValue))
-        {
+        if (isset($toValue)) {
             $array[$indexFrom] = $toValue;
         }
 
