@@ -20,5 +20,6 @@ $array = [
     'c' => false
 ];
 
-$realFirstValue = ArrayHelper::getFirstElement($array);
+$realFirstIndex = ArrayHelper::getFirstIndex($array); // 'a'
+$realFirstValue = ArrayHelper::getFirstValue($array); // 'word'
 ```
