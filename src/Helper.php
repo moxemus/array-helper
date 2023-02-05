@@ -5,6 +5,53 @@ namespace moxemus\array;
 class Helper
 {
     /**
+     * Returns array value by index or some default value
+     *
+     * @param $index
+     * @param array $array
+     * @param null $default
+     * @return mixed
+     */
+    public static function getValue($index, array $array, $default = null): mixed
+    {
+        return (key_exists($index, $array))
+            ? $array[$index]
+            : $default;
+    }
+
+    /**
+     * Returns int value if it's possible, otherwise returns NULL
+     *
+     * @param $index
+     * @param array $array
+     * @return int|null
+     */
+    public static function getIntOrNull($index, array $array): ?int
+    {
+        $value = self::getValue($index, $array);
+
+        return (is_null($value))
+            ? null
+            : intval($value);
+    }
+
+    /**
+     * Returns bool value if it's possible, otherwise returns NULL
+     *
+     * @param $index
+     * @param array $array
+     * @return bool|null
+     */
+    public static function getBoolOrNull($index, array $array): ?bool
+    {
+        $value = self::getValue($index, $array);
+
+        return (is_null($value))
+            ? null
+            : boolval($value);
+    }
+
+    /**
      * Returns real first array value, not with zero index
      *
      * @param array $array
