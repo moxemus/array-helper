@@ -5,14 +5,15 @@ namespace moxemus\array;
 class Helper
 {
     /**
-     * Returns array value by index or some default value
+     * Returns array value by index if it's possible, otherwise returns default
      *
-     * @param $index
+     * @param string|int|null $index
      * @param array $array
      * @param null $default
+     *
      * @return mixed
      */
-    public static function getValue($index, array $array, $default = null): mixed
+    public static function getValue(string|int|null $index, array $array, $default = null): mixed
     {
         return (key_exists($index, $array))
             ? $array[$index]
@@ -22,11 +23,12 @@ class Helper
     /**
      * Returns int value if it's possible, otherwise returns NULL
      *
-     * @param $index
+     * @param string|int|null $index
      * @param array $array
+     *
      * @return int|null
      */
-    public static function getIntOrNull($index, array $array): ?int
+    public static function getIntOrNull(string|int|null $index, array $array): ?int
     {
         $value = self::getValue($index, $array);
 
@@ -38,11 +40,12 @@ class Helper
     /**
      * Returns bool value if it's possible, otherwise returns NULL
      *
-     * @param $index
+     * @param string|int|null $index
      * @param array $array
+     *
      * @return bool|null
      */
-    public static function getBoolOrNull($index, array $array): ?bool
+    public static function getBoolOrNull(string|int|null $index, array $array): ?bool
     {
         $value = self::getValue($index, $array);
 
@@ -53,33 +56,38 @@ class Helper
 
     /**
      * Returns real first array value, not with zero index
+     * If array is empty returns NULL
      *
      * @param array $array
+     *
      * @return mixed
      */
     public static function getFirstValue(array $array): mixed
     {
-        return $array[self::getFirstIndex($array)];
+        return $array[self::getFirstIndex($array)] ?? null;
     }
 
     /**
-     * Returns real last array value, not with count($array)-1 index
+     * Returns real last array value, not with just count()-1 index
+     * If array is empty returns NULL
      *
      * @param array $array
+     *
      * @return string|int|null
      */
     public static function getLastValue(array $array): string|int|null
     {
-        return $array[self::getLastIndex($array)];
+        return $array[self::getLastIndex($array)] ?? null;
     }
 
     /**
-     * Returns real first array element, not with zero index
+     * Returns real first array index, not with just 0 index
      *
      * @param array $array
-     * @return mixed
+     *
+     * @return string|int|null
      */
-    public static function getFirstIndex(array $array): mixed
+    public static function getFirstIndex(array $array): string|int|null
     {
         if (empty($array)) return null;
 
@@ -89,9 +97,10 @@ class Helper
     }
 
     /**
-     * Returns real last array element, not with zero index
+     * Returns real last array index, not just count()-1
      *
      * @param array $array
+     *
      * @return string|int|null
      */
     public static function getLastIndex(array $array): string|int|null
@@ -105,38 +114,47 @@ class Helper
 
     /**
      * Returns index of max value in array
+     * If array is empty returns NULL
      *
      * @param array $array
-     * @return string|int
+     *
+     * @return string|int|null
      */
-    public static function getMaxIndex(array $array): string|int
+    public static function getMaxIndex(array $array): string|int|null
     {
+        if (empty($array)) return null;
+
         return array_keys($array, max($array))[0];
     }
 
     /**
      * Returns index of miv value in array
+     * If array is empty returns NULL
      *
      * @param array $array
-     * @return string|int
+     *
+     * @return string|int|null
      */
-    public static function getMinIndex(array $array): string|int
+    public static function getMinIndex(array $array): string|int|null
     {
+        if (empty($array)) return null;
+
         return array_keys($array, min($array))[0];
     }
 
     /**
-     * Moves element on any new place in array
+     * Moves value on any new place in array
      *
      * @param array $array
-     * @param $indexFrom
-     * @param $indexTo
+     * @param string|int|null $indexFrom
+     * @param string|int|null $indexTo
+     *
      * @return mixed
      */
-    public static function moveElement(array &$array, $indexFrom, $indexTo): bool
+    public static function moveValue(array &$array, string|int|null $indexFrom, string|int|null $indexTo): bool
     {
         $fromValue = $array[$indexFrom] ?? null;
-        $toValue   = $array[$indexTo] ?? null;
+        $toValue   = $array[$indexTo]   ?? null;
 
         if (is_null($fromValue)) return false;
 
@@ -154,6 +172,7 @@ class Helper
      * Returns is array empty without NULL, '' and 0 values
      *
      * @param array $array
+     *
      * @return bool
      */
     public static function isEmpty(array $array): bool
@@ -166,12 +185,13 @@ class Helper
      *
      * @param array $subArray
      * @param array $array
+     *
      * @return bool
      */
     public static function arrayContains(array $subArray, array $array): bool
     {
-        foreach($array as $value) {
-            if(is_array($value)) {
+        foreach ($array as $value) {
+            if (is_array($value)) {
                 if ($value === $subArray || self::arrayContains($subArray, $value))
                     return true;
             }
