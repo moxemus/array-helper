@@ -5,7 +5,7 @@ namespace moxemus\array;
 class Helper
 {
     /**
-     * Returns array value by index if it's possible, otherwise returns default
+     * Returns array value by index if it's possible, otherwise returns default.
      *
      * @param string|int|null $index
      * @param array $array
@@ -21,7 +21,7 @@ class Helper
     }
 
     /**
-     * Returns int value if it's possible, otherwise returns NULL
+     * Returns int value if it's possible, otherwise returns NULL.
      *
      * @param string|int|null $index
      * @param array $array
@@ -38,7 +38,7 @@ class Helper
     }
 
     /**
-     * Returns bool value if it's possible, otherwise returns NULL
+     * Returns bool value if it's possible, otherwise returns NULL.
      *
      * @param string|int|null $index
      * @param array $array
@@ -55,8 +55,8 @@ class Helper
     }
 
     /**
-     * Returns real first array value, not with zero index
-     * If array is empty returns NULL
+     * Returns real first array value, not with zero index.
+     * If array is empty returns NULL.
      *
      * @param array $array
      *
@@ -68,8 +68,8 @@ class Helper
     }
 
     /**
-     * Returns real last array value, not with just count()-1 index
-     * If array is empty returns NULL
+     * Returns real last array value, not with just count()-1 index.
+     * If array is empty returns NULL.
      *
      * @param array $array
      *
@@ -81,7 +81,7 @@ class Helper
     }
 
     /**
-     * Returns real first array index, not with just 0 index
+     * Returns real first array index, not with just 0 index.
      *
      * @param array $array
      *
@@ -99,7 +99,7 @@ class Helper
     }
 
     /**
-     * Returns real last array index, not just count()-1
+     * Returns real last array index, not just count()-1.
      *
      * @param array $array
      *
@@ -117,8 +117,8 @@ class Helper
     }
 
     /**
-     * Returns index of max value in array
-     * If array is empty returns NULL
+     * Returns index of max value in array.
+     * If array is empty returns NULL.
      *
      * @param array $array
      *
@@ -134,8 +134,8 @@ class Helper
     }
 
     /**
-     * Returns index of miv value in array
-     * If array is empty returns NULL
+     * Returns index of miv value in array.
+     * If array is empty returns NULL.
      *
      * @param array $array
      *
@@ -151,7 +151,7 @@ class Helper
     }
 
     /**
-     * Returns linear array from multidimensional
+     * Returns linear array from multidimensional.
      *
      * @param array $array
      *
@@ -168,7 +168,9 @@ class Helper
     }
 
     /**
-     * Moves value on any new place in array
+     * Moves value on any new place in array.
+     * If array have indexTo, values between indexes will swap.
+     * If array don't have indexTo it will be added with value from indexFrom.
      *
      * @param array $array
      * @param string|int|null $indexFrom
@@ -178,24 +180,21 @@ class Helper
      */
     public static function moveValue(array &$array, string|int|null $indexFrom, string|int|null $indexTo): bool
     {
-        $fromValue = $array[$indexFrom] ?? null;
-        $toValue   = $array[$indexTo]   ?? null;
-
-        if (is_null($fromValue)) {
+        if (!key_exists($indexFrom, $array)) {
             return false;
         }
 
-        if (isset($toValue)) {
-            $array[$indexFrom] = $toValue;
+        if (key_exists($indexTo, $array)) {
+            $array[$indexFrom] = self::getValue($indexTo, $array);
         }
 
-        $array[$indexTo] = $fromValue;
+        $array[$indexTo] = self::getValue($indexFrom, $array);
 
         return true;
     }
 
     /**
-     * Returns is array empty without NULL, '' and 0 values
+     * Returns is array empty without NULL, '' and 0 values.
      *
      * @param array $array
      *
@@ -207,7 +206,7 @@ class Helper
     }
 
     /**
-     * Checks recursively if array contains subarray
+     * Checks recursively if array contains subarray.
      *
      * @param array $subArray
      * @param array $array
