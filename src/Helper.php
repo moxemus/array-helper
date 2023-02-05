@@ -160,4 +160,23 @@ class Helper
     {
         return empty(array_filter($array));
     }
+
+    /**
+     * Checks recursively if array contains subarray
+     *
+     * @param array $subArray
+     * @param array $array
+     * @return bool
+     */
+    public static function arrayContains(array $subArray, array $array): bool
+    {
+        foreach($array as $value) {
+            if(is_array($value)) {
+                if ($value === $subArray || self::arrayContains($subArray, $value))
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }
