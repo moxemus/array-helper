@@ -142,7 +142,7 @@ class Helper
 
         if (isset($toValue))
         {
-            $array[$indexFrom]  = $toValue;
+            $array[$indexFrom] = $toValue;
         }
 
         $array[$indexTo] = $fromValue;
@@ -159,17 +159,5 @@ class Helper
     public static function isEmpty(array $array): bool
     {
         return empty(array_filter($array));
-    }
-
-    /**
-     * Returns is arrays are equal
-     *
-     * @param array $a
-     * @param array $b
-     * @return bool
-     */
-    public static function isEqual(array $a, array $b): bool
-    {
-        return empty(array_diff($a, $b));
     }
 }
