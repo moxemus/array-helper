@@ -64,7 +64,7 @@ class Helper
      */
     public static function getFirstValue(array $array): mixed
     {
-        return $array[self::getFirstIndex($array)] ?? null;
+        return $array[array_key_first($array)] ?? null;
     }
 
     /**
@@ -73,47 +73,11 @@ class Helper
      *
      * @param array $array
      *
-     * @return string|int|null
+     * @return mixed
      */
-    public static function getLastValue(array $array): string|int|null
+    public static function getLastValue(array $array): mixed
     {
-        return $array[self::getLastIndex($array)] ?? null;
-    }
-
-    /**
-     * Returns real first array index, not with just 0 index.
-     *
-     * @param array $array
-     *
-     * @return string|int|null
-     */
-    public static function getFirstIndex(array $array): string|int|null
-    {
-        if (empty($array)) {
-            return null;
-        }
-
-        $keys = array_keys($array);
-
-        return $keys[0];
-    }
-
-    /**
-     * Returns real last array index, not just count()-1.
-     *
-     * @param array $array
-     *
-     * @return string|int|null
-     */
-    public static function getLastIndex(array $array): string|int|null
-    {
-        if (empty($array)) {
-            return null;
-        }
-
-        $keys = array_keys($array);
-
-        return $keys[count($array) - 1];
+        return $array[array_key_last($array)] ?? null;
     }
 
     /**
@@ -194,6 +158,63 @@ class Helper
     }
 
     /**
+     * Removes first array value.
+     *
+     * @param array $array
+     *
+     * @return mixed
+     */
+    public static function removeFirst(array &$array): bool
+    {
+        if (empty($array)) {
+            return false;
+        }
+
+        unset($array[array_key_first($array)]);
+
+        return true;
+    }
+
+    /**
+     * Removes last array value.
+     *
+     * @param array $array
+     *
+     * @return mixed
+     */
+    public static function removeLast(array &$array): bool
+    {
+        if (empty($array)) {
+            return false;
+        }
+
+        unset($array[array_key_last($array)]);
+
+        return true;
+    }
+
+    /**
+     * Removes all selected entries from array.
+     *
+     * @param array $array
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public static function removeValue(array &$array, mixed $value): bool
+    {
+        if (empty($array)) {
+            return false;
+        }
+
+        foreach (array_keys($array, $value, true) as $key) {
+            unset($array[$key]);
+        }
+
+        return true;
+    }
+
+    /**
      * Returns is array empty without NULL, '' and 0 values.
      *
      * @param array $array
@@ -217,8 +238,9 @@ class Helper
     {
         foreach ($array as $value) {
             if (is_array($value)) {
-                if ($value === $subArray || self::arrayContains($subArray, $value))
+                if ($value === $subArray || self::arrayContains($subArray, $value)) {
                     return true;
+                }
             }
         }
 
