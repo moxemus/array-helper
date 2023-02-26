@@ -81,6 +81,32 @@ class Helper
     }
 
     /**
+     * Returns first $count values from array
+     *
+     * @param array $array
+     * @param int $count
+     *
+     * @return array
+     */
+    public static function getFirstValues(array $array, int $count): array
+    {
+        return array_slice($array, 0, $count, true);
+    }
+
+    /**
+     * Returns last $count values from array
+     *
+     * @param array $array
+     * @param int $count
+     *
+     * @return array
+     */
+    public static function getLastValues(array $array, int $count): array
+    {
+        return array_slice($array, count($array) - $count, $count, true);
+    }
+
+    /**
      * Returns index of max value in array.
      * If array is empty returns NULL.
      *
