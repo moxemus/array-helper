@@ -150,7 +150,7 @@ class Helper
     public static function getSimpleArray(array $array): array
     {
         $result = [];
-        array_walk_recursive($array, function ($item, $key) use (&$result) {
+        array_walk_recursive($array, function ($item) use (&$result) {
             $result[] = $item;
         });
 
@@ -263,10 +263,12 @@ class Helper
     public static function arrayContains(array $subArray, array $array): bool
     {
         foreach ($array as $value) {
-            if (is_array($value)) {
-                if ($value === $subArray || self::arrayContains($subArray, $value)) {
-                    return true;
-                }
+            if (!is_array($value)) {
+                continue;
+            }
+
+            if ($value === $subArray || self::arrayContains($subArray, $value)) {
+                return true;
             }
         }
 
