@@ -166,7 +166,7 @@ class Helper
      * @param string|int|null $indexFrom
      * @param string|int|null $indexTo
      *
-     * @return mixed
+     * @return bool
      */
     public static function moveValue(array &$array, string|int|null $indexFrom, string|int|null $indexTo): bool
     {
@@ -225,7 +225,7 @@ class Helper
      * @param array $array
      * @param mixed $value
      *
-     * @return mixed
+     * @return bool
      */
     public static function removeValue(array &$array, mixed $value): bool
     {
