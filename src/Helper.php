@@ -184,6 +184,25 @@ class Helper
     }
 
     /**
+     * Removes values from array by provided keys.
+     *
+     * @param array $array
+     * @param array $keys
+     *
+     * @return mixed
+     */
+    public static function removeByKeys(array &$array, array $keys): bool
+    {
+        if (empty($array) || empty($keys)) {
+            return false;
+        }
+
+        $array = array_diff_key($array, array_flip($keys));
+
+        return true;
+    }
+
+    /**
      * Removes first array value.
      *
      * @param array $array
