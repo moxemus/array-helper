@@ -8,7 +8,7 @@
             "moxemus\\array\\": "src/"
         }
     },
-    "version": "1.5",
+    "version": "1.6",
     "minimum-stability": "dev",
     "require": {}
 }
