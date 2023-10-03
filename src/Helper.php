@@ -203,6 +203,43 @@ class Helper
     }
 
     /**
+     * Returns keys of all merged arrays
+     *
+     * @param array ...$arrays
+     *
+     * @return array
+     */
+    public static function getKeys(array ...$arrays): array
+    {
+        return array_keys($arrays);
+    }
+
+    /**
+     * Returns values of all merged arrays
+     *
+     * @param array ...$arrays
+     *
+     * @return array
+     */
+    public static function getValues(array ...$arrays): array
+    {
+        return array_values($arrays);
+    }
+
+    /**
+     * Returns keys of different values in array1 and array2.
+     *
+     * @param array $array1
+     * @param array $array2
+     *
+     * @return array
+     */
+    public static function getKeysOfModifiedValues(array $array1, array $array2): array
+    {
+        return array_keys(array_diff_assoc($array1, $array2));
+    }
+
+    /**
      * Removes first array value.
      *
      * @param array $array
